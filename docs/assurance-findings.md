@@ -128,9 +128,3 @@ I wanted the findings register to show not only what failed, but also whether th
 These findings come from a synthetic training dataset.
 
 They do not describe Analog Devices' actual data quality, controls, suppliers, or assurance findings.
-```
-
-Use this commit message:
-
-```text
-Document assurance findings and remediation status
