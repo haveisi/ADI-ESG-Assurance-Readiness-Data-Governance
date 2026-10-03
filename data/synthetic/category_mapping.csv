@@ -1,0 +1,8 @@
+gl_account,procurement_category,scope3_category,default_method
+610100,Semiconductor materials,Cat. 1,Spend-based
+610200,Chemicals,Cat. 1,Supplier/Spend
+610300,Packaging,Cat. 1,Spend-based
+620100,Consulting services,Cat. 1,Spend-based
+710100,Manufacturing equipment,Cat. 2,Spend-based
+710200,Facility equipment,Cat. 2,Spend-based
+710300,IT capital equipment,Cat. 2,Spend-based

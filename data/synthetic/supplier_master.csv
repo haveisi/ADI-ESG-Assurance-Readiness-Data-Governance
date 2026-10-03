@@ -1,0 +1,13 @@
+supplier_id,supplier_name,supplier_country,default_procurement_category,primary_data_capable,note
+SUP001,Alpha Silicon Materials,US,Semiconductor materials,Y,Verified supplier data
+SUP002,Beta Process Chemicals,DE,Chemicals,Y,Supplier-specific data
+SUP003,Gamma Equipment Systems,JP,Manufacturing equipment,N,Secondary factor
+SUP004,Delta Facilities Engineering,US,Facility equipment,N,Secondary factor
+SUP005,Epsilon Consulting,GB,Consulting services,N,Secondary factor
+SUP006,Zeta IT Hardware,TW,IT capital equipment,N,Secondary factor
+SUP007,Eta Specialty Gases,KR,Chemicals,Y,Supplier-specific data
+SUP008,Theta Wafer Inputs,SG,Semiconductor materials,Y,Supplier-specific data
+SUP009,Iota Industrial Services,IE,Consulting services,N,Secondary factor
+SUP010,Kappa Test Equipment,MY,Manufacturing equipment,N,Secondary factor
+SUP011,Lambda Packaging,MX,Packaging,N,Secondary factor
+SUP012,Mu Logistics Tech,US,IT capital equipment,N,Secondary factor
