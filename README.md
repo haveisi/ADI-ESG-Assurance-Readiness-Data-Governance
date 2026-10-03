@@ -1,12 +1,32 @@
 # ADI ESG Assurance Readiness & Data Governance
 
-I built this project to understand a question that comes up often in ESG reporting:
+I built this project around a question I kept coming back to in ESG reporting:
 
-**What has to happen behind the scenes before a Scope 3 number is actually ready to be trusted, reviewed, or assured?**
+**What has to happen behind the scenes before a Scope 3 number is ready to be trusted, reviewed, or assured?**
 
-I used Analog Devices (ADI) as the public case context because its ESG reporting gives enough information to study upstream Scope 3 emissions, supplier data, calculation methods, and assurance.
+I used Analog Devices (ADI) as the public case context because its ESG reporting provides enough information to study upstream Scope 3 emissions, supplier data, calculation methods, and assurance.
 
 The transaction-level data in this repository are synthetic. I created them only to test the workflow. They are not ADI internal data.
+
+## Project at a glance
+
+**Focus:** Scope 3 Category 1 and Category 2
+
+**Tools:** Databricks, SQL, Delta tables, synthetic supplier and procurement data
+
+**Main control areas:** supplier traceability, duplicates, cutoff, classification, FX, emission factors, evidence, manual overrides, and reconciliation
+
+**Result:**
+
+```text
+73 source records
+→ 72 after duplicate remediation
+→ 61 ELIGIBLE
+→ 11 HOLD
+→ Gold reconciliation: PASS
+```
+
+![Reporting eligibility](assets/reporting-eligibility.png)
 
 ## What I built
 
@@ -19,7 +39,7 @@ Bronze
         ↓
 Silver validation and control checks
         ↓
-Exception management and remediation
+Exception review and remediation
         ↓
 Reporting eligibility
         ↓
@@ -30,20 +50,20 @@ Source-to-disclosure reconciliation
 Assurance workpapers and findings
 ```
 
-The idea was to keep the original source data intact, test it, document exceptions, correct problems through a controlled process, and only allow supported records into the reporting layer.
+The idea was simple: keep the original source data intact, test it, document exceptions, correct issues through a controlled process, and only allow supported records into the reporting layer.
 
 ## Scope
 
-I focused on upstream Scope 3, especially:
+I focused on two upstream Scope 3 categories:
 
 - Category 1 — Purchased Goods and Services
 - Category 2 — Capital Goods
 
-These categories are useful for this type of exercise because the calculations depend on supplier information, spend data, classification, emission factors, and supporting evidence.
+These categories are useful for this exercise because the calculation depends on several things working together: supplier information, spend data, classification, emission factors, calculation logic, and supporting evidence.
 
 ## Controls I tested
 
-I built checks for issues such as:
+I built checks for:
 
 - duplicate transactions
 - missing supplier IDs
@@ -52,45 +72,58 @@ I built checks for issues such as:
 - incorrect Scope 3 classification
 - FX calculation errors
 - emissions calculation differences
-- expired or unapproved emission factors
+- retired or unapproved emission factors
 - emission-factor unit mismatches
 - missing supplier-specific evidence
 - manual overrides without approval
 
 When a record failed a control, I did not simply remove it.
 
-I created an exception, reviewed the issue, and either remediated it or placed the record on hold.
+I created an exception, reviewed the issue, and either remediated it or kept the record on hold.
 
-One lesson from the project was that a control failure and a confirmed misstatement are not the same thing.
+One of the main lessons for me was that a control failure and a confirmed misstatement are not the same thing.
 
 ## Reporting eligibility
 
-I added an eligibility step before Gold reporting.
+Before data could move into Gold, I added a reporting eligibility check.
 
-Records with unresolved issues are marked:
+```text
+Open exception → HOLD
+No open exception → ELIGIBLE
+```
 
-`HOLD`
-
-Records without unresolved issues are marked:
-
-`ELIGIBLE`
-
-Only eligible records are included in the Gold reporting output.
-
-In the synthetic dataset, the flow was:
+In the synthetic dataset:
 
 ```text
 73 source records
 72 after duplicate remediation
-61 reporting-eligible
-11 held for unresolved exceptions
+61 ELIGIBLE
+11 HOLD
 ```
 
-The Gold output reconciled back to the eligible Silver population, and the source-to-disclosure reconciliation returned:
+Only ELIGIBLE records were included in the Gold reporting output.
+
+![Reporting eligibility](assets/reporting-eligibility.png)
+
+The HOLD records remained visible for further review rather than disappearing from the process.
+
+## Gold reconciliation
+
+The final reporting control compared the eligible Silver population with the Gold output.
+
+```text
+Eligible Silver emissions = Gold emissions
+```
+
+For this case, the reconciliation returned:
 
 **PASS**
 
-That does not mean every record passed every control. It means the final reporting output can be traced back to the records that were approved for reporting.
+![Gold reconciliation](assets/gold-reconciliation.png)
+
+The PASS result means the final Gold output agrees with the records approved for reporting.
+
+It does not mean every source record passed every control.
 
 ## Assurance workpapers
 
@@ -106,13 +139,14 @@ Assertion
 → Conclusion
 ```
 
-This helped me look at the data differently.
+This changed how I looked at the data.
 
-Instead of only asking, “Did the calculation run?”, I started asking:
+Instead of only asking, "Did the calculation run?", I started asking:
 
 - Can I reproduce the number?
-- Can I trace it back to evidence?
+- Can I trace it back to the source?
 - Was the correct method used?
+- Is there evidence behind it?
 - Were exceptions reviewed?
 - Is there an approval trail?
 - Can someone else understand what changed and why?
@@ -131,7 +165,9 @@ I use those areas only as a reference structure.
 
 This project is not a KPMG assessment and does not calculate a KPMG maturity score.
 
-I also left the Skills area unassessed because this project does not provide evidence about staff training or competency.
+I also left the Skills area unassessed because the project does not provide evidence about staff training or competency.
+
+![Assurance readiness summary](assets/assurance-readiness-summary.png)
 
 ## Repository contents
 
@@ -156,13 +192,18 @@ docs/
     control-framework.md
     assurance-findings.md
     sources.md
+
+assets/
+    reporting-eligibility.png
+    gold-reconciliation.png
+    assurance-readiness-summary.png
 ```
 
 ## Why this project matters to me
 
 My main interest in ESG data is moving beyond reporting alone.
 
-A sustainability number is more useful when I can explain:
+A sustainability number becomes much more useful when I can explain:
 
 - where it came from
 - what rules were applied
@@ -173,10 +214,9 @@ A sustainability number is more useful when I can explain:
 
 That is what I wanted to practice with this project.
 
+The part I found most useful was moving from a reporting mindset to an assurance-readiness mindset: not just producing the number, but being able to defend the process behind it.
+
 ## Disclaimer
-
 This is an independent portfolio project.
-
 Analog Devices did not sponsor, provide internal data for, or review this work.
-
 All transaction-level data in the repository are synthetic. Public ADI reports are used only as external case context.
