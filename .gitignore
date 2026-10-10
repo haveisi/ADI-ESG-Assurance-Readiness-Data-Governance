@@ -1,1 +1,25 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
 
+# Jupyter
+.ipynb_checkpoints/
+
+# Databricks / local exports
+*.dbc
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+
+# Local environment / secrets
+.env
+.env.*
+*.pem
+*.key
