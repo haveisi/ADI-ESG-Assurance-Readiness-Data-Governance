@@ -126,19 +126,23 @@ They help answer questions an assurer or internal reviewer would ask:
 - Were manual changes approved?
 - Can the final disclosure be traced back to the source population?
 
-Research on ESG assurance makes a similar point: stronger reporting depends on robust systems, controls, risk assessment, and data validation, and internal audit can play a useful role in testing those areas before external assurance. 1-s2.0-S0890838925002550-main
+Research on ESG assurance makes a similar point: stronger reporting depends on robust systems, controls, risk assessment, and data validation, and internal audit can play a useful role in testing those areas before external assurance. 
 
 ## Metric-level thinking
 
 One idea I found especially useful from the assurance literature is that ESG assurance is often metric-specific.
 
-A company may assure some metrics, use different levels of assurance for others, or leave some outside the assurance scope.
+Gipper, Ross, and Shi (2025) examined ESG assurance among S&P 500 firms and found substantial variation in which ESG metrics were assured, the level of assurance obtained, the assurance standards used, and the type of assurance provider.
 
-That is why this project does not treat "ESG assurance" as one broad yes/no condition.
+That helped shape how I approached this project.
 
-I test specific Scope 3 data, controls, and outputs instead.
+I did not treat "ESG assurance" as one broad yes/no condition.
 
-Research on U.S. ESG assurance found wide variation in which metrics are assured, the level of assurance obtained, and the standards used. GHG metrics were among the environmental measures commonly included in assurance engagements. 
+Instead, I tested specific Scope 3 records, calculations, evidence, controls, and reporting outputs.
+
+This is especially relevant for environmental metrics because the study found that firms increasingly assured individual environmental measures, including greenhouse-gas metrics.
+
+Source: Gipper, Ross, and Shi (2025), *ESG assurance in the United States*, Review of Accounting Studies.
 
 ## Limited assurance mindset
 
