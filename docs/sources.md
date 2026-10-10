@@ -85,6 +85,24 @@ I kept the project separated into two parts:
 
 That distinction is important because public reports can show what a company discloses, but they do not provide access to the underlying transaction data or complete internal control environment.
 
+## ESG Assurance Research
+
+Gipper, Brandon, Samantha Ross, and Shawn X. Shi.  
+**“ESG assurance in the United States.”**  
+*Review of Accounting Studies*, Volume 30, pages 1753–1803, 2025.  
+Published online October 7, 2024.
+
+DOI: 10.1007/s11142-024-09856-2
+
+The study examines ESG assurance practices among S&P 500 firms from 2010–2020. It documents substantial variation in:
+
+- which ESG metrics are assured,
+- the level of assurance,
+- assurance standards,
+- and the type of assurance provider.
+
+The paper is used in this project as background for treating ESG assurance as metric-specific rather than as a single company-wide yes/no condition.
+
 ## Disclaimer
 
 This is an independent portfolio project.
