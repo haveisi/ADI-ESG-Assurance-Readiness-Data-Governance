@@ -1,149 +1,109 @@
-# Responsible Sourcing, Supplier Risk & ESG Assurance Analytics
+# ESG Assurance Readiness & Data Governance Analytics
 
-This portfolio project demonstrates how responsible-sourcing data can be governed, validated, traced, and combined with Scope 3 emissions, supplier evidence, geographic risk, and assurance controls to support supplier due diligence, remediation, and reporting decisions.
+This portfolio project demonstrates how ESG data can be prepared for assurance by making it traceable, controlled, reproducible, and supported by evidence before it enters external reporting.
 
-The project integrates responsible sourcing, supplier risk, Scope 3 Category 1 emissions, geospatial analysis, data governance, control testing, exception management, and assurance readiness in a Databricks + Power BI workflow.
+The project focuses on the data and control layer behind ESG reporting rather than only the final sustainability metrics.
 
-> **Important:** Public IFF sustainability and responsible-sourcing materials are used only as a business-context reference. Supplier, procurement, transaction, farm, and evidence records used in this project are synthetic. Geographic risk indicators provide landscape-level due-diligence context and do not establish supplier causation or wrongdoing.
+It combines:
+
+- ESG data governance
+- Scope 3 control testing
+- Bronze / Silver / Gold data architecture
+- data-quality validation
+- evidence traceability
+- exception management
+- reconciliation
+- assurance workpapers
+- reporting eligibility
+- executive assurance-readiness reporting
+
+The workflow was built using Databricks, SQL, Python, and analytical reporting outputs.
+
+> This is a portfolio and training project. Synthetic data are used to demonstrate the assurance-readiness workflow and should not be interpreted as actual company reporting data.
 
 ---
 
 ## Business Question
 
-**How can supplier, sourcing, emissions, evidence, and geographic-risk data be governed together to identify responsible-sourcing risks, prioritize supplier review, and determine whether records are ready for ESG reporting?**
+**How can ESG data be governed, tested, traced, and documented so that management and an independent reviewer can understand where a reported number came from, what controls were applied, what exceptions remain, and whether the data are ready for assurance?**
 
-The project is designed around a practical responsible-sourcing problem:
+The project addresses questions such as:
 
-- Which suppliers or sourcing records require additional due diligence?
-- Is required sourcing or supplier evidence available?
-- Are Scope 3 calculations methodologically valid?
-- Are suppliers linked to geographic areas with elevated landscape-level risk?
-- Which exceptions are high priority?
-- Who owns remediation?
-- Which records can enter governed reporting?
-- Which records must remain under review or on hold?
-
----
-
-## Project Objectives
-
-The project has five primary objectives:
-
-1. **Strengthen responsible-sourcing governance** by defining master data, ownership, validation, and approval logic.
-2. **Integrate supplier due-diligence evidence** with sourcing and procurement records.
-3. **Connect responsible sourcing with Scope 3 Category 1 accounting** without mixing unsupported methodologies.
-4. **Add geographic risk context** using public municipality-level and deforestation-related data.
-5. **Build an assurance-ready control framework** that identifies exceptions, assigns remediation, and determines reporting eligibility.
+- Where did the ESG value come from?
+- Who owns the data?
+- Was the methodology valid?
+- Was supporting evidence available?
+- Did the record pass required controls?
+- Were exceptions identified and documented?
+- Was remediation performed?
+- Can the result be reproduced?
+- Should the record be included in governed reporting?
 
 ---
 
-## Responsible Sourcing Framework
+## What Assurance Readiness Means
 
-The project follows a practical responsible-sourcing workflow:
+For this project, assurance readiness means making ESG information:
 
-**Map → Scope → Prove → Align → Assure**
+**traceable, reproducible, controlled, and evidence-supported before an independent reviewer examines it.**
 
-### Map
+A reported number should be connected to:
 
-Identify:
+**source → transformation → control → evidence → exception → remediation → approval**
 
-- suppliers
-- sourcing locations
-- farms
-- municipalities
-- materials
-- transactions
-- sourcing relationships
+The goal is not only to calculate ESG metrics.
 
-### Scope
-
-Define:
-
-- responsible-sourcing requirements
-- supplier evidence requirements
-- sourcing-status requirements
-- emissions methodology
-- geographic-risk indicators
-- reporting boundaries
-
-### Prove
-
-Require supporting evidence such as:
-
-- sourcing declarations
-- supplier GHG information
-- methodology documentation
-- approved emissions factors
-- geographic reference data
-
-### Align
-
-Standardize:
-
-- supplier IDs
-- municipality codes
-- farm IDs
-- material IDs
-- transaction records
-- emissions methodology
-- sourcing-status fields
-- evidence status
-
-### Assure
-
-Test:
-
-- completeness
-- validity
-- traceability
-- evidence sufficiency
-- methodology
-- geography
-- reporting eligibility
-- exception closure
+The goal is to make those metrics defensible.
 
 ---
 
-## Data Governance Approach
+## Data Governance Framework
 
-The project applies the governance sequence:
+The project uses a simple governance sequence:
 
 **Define → Own → Source → Check → Trace → Approve**
 
 ### Define
 
-Establish clear definitions for:
+Establish clear definitions for fields, metrics, methods, and statuses.
 
-- supplier
-- transaction
-- sourcing status
-- evidence status
+Examples include:
+
+- reporting boundary
 - emissions method
-- reporting eligibility
+- evidence status
 - exception severity
+- reporting eligibility
 
 ### Own
 
-Assign responsibilities across roles such as:
+Assign responsibility for the data and the control.
 
-- Responsible Sourcing
-- Carbon Accounting
-- Data Governance
-- Data Steward
-- technical data custodian
+Typical roles include:
+
+- data owner
+- data steward
+- data producer
+- technical custodian
+- reviewer
 
 ### Source
 
-Preserve source-system values and distinguish:
+Preserve where the original value came from.
 
-- original source values
+This includes distinguishing:
+
+- source values
 - standardized values
 - governed values
-- derived analytical outputs
+- calculated values
+- reported values
 
 ### Check
 
-Apply controls for:
+Apply validation and assurance controls.
+
+Examples include:
 
 - completeness
 - validity
@@ -151,677 +111,613 @@ Apply controls for:
 - uniqueness
 - methodology
 - evidence
-- geography
-- reporting eligibility
+- reconciliation
 
 ### Trace
 
-Maintain lineage from:
-
-**source record → control result → exception → remediation → reporting decision**
+Maintain a visible lineage from source to reporting output.
 
 ### Approve
 
-Only records satisfying the required governance and control conditions become eligible for governed reporting.
+Only records that satisfy the required governance and control conditions should enter governed reporting.
+
+---
+
+## Governance vs Data Management
+
+I treat data governance and data management as related but different.
+
+**Data management** is about moving, storing, transforming, and maintaining data.
+
+**Data governance** is about deciding:
+
+- what the data means
+- who owns it
+- which rules apply
+- what quality is acceptable
+- what evidence is required
+- who can approve it
+
+A simple analogy is:
+
+> Data management is driving the car.  
+> Data governance is the traffic rules, road signs, licensing, and accountability system.
+
+Both are necessary.
 
 ---
 
 ## Solution Architecture
 
 ```text
-IFF public responsible-sourcing requirements
-+ Synthetic supplier / procurement / evidence data
-+ Public geographic datasets
-+ Public emissions factors
-                |
-                v
-             BRONZE
-     Raw ingestion and preservation
-                |
-                v
-             SILVER
-     Standardization
-     Supplier master-data validation
-     Geographic validation
-     Scope 3 methodology validation
-     Supplier evidence validation
-     Responsible-sourcing controls
-                |
-                v
-              GOLD
-     Reporting eligibility
-     Control results
-     Exception register
-     Assurance workpaper
-     Readiness assessment
-     Power BI star schema
-                |
-                v
-            POWER BI
-     Executive readiness summary
-     Control & exception management
-     Supplier risk & sourcing decision
+Synthetic ESG source data
+          |
+          v
+       BRONZE
+Raw ingestion and source preservation
+          |
+          v
+       SILVER
+Standardization
+Data-quality validation
+Method validation
+Evidence validation
+Exception identification
+          |
+          v
+        GOLD
+Governed reporting tables
+Reconciliation
+Exception register
+Assurance workpaper
+Readiness summary
+          |
+          v
+ EXECUTIVE REPORTING
+Assurance readiness
+Open exceptions
+Control status
+Reporting eligibility
+Management conclusion
 ```
 
 ---
 
-## Data Sources
+## Bronze / Silver / Gold Design
 
-The project combines public reference data with synthetic operational records.
+### Bronze
 
-### Public / External Sources
+The Bronze layer preserves raw source information.
 
-The workflow uses public sources for:
+The purpose is to keep an unchanged reference point before applying business rules.
 
-- responsible-sourcing business context
-- municipality reference data
-- soybean deforestation exposure
-- deforestation-alert information
-- emissions factors
+Typical responsibilities include:
+
+- source ingestion
+- source preservation
+- schema capture
+- basic technical validation
+
+---
+
+### Silver
+
+The Silver layer standardizes and tests the data.
 
 Examples include:
 
-- IFF public sustainability and responsible-sourcing materials
-- IBGE municipality reference data
-- Trase soy / deforestation-related data
-- MapBiomas Alerta
-- U.S. EPA Supply Chain GHG Emission Factors
+- field standardization
+- data-type validation
+- completeness checks
+- business-rule validation
+- methodology checks
+- evidence-status checks
+- exception classification
 
-### Synthetic Data
+The Silver layer answers:
 
-Synthetic records include:
-
-- supplier master data
-- procurement transactions
-- farm IDs
-- supplier-farm relationships
-- evidence records
-- sourcing-status records
-
-These synthetic data are designed only to demonstrate the analytical and control workflow.
+**Can this record be trusted enough to move forward?**
 
 ---
 
-## Scope 3 Category 1 Methodology
+### Gold
 
-The project incorporates purchased-goods-and-services emissions as one input to responsible-sourcing decision support.
+The Gold layer contains governed outputs used for reporting and assurance.
 
-The demonstration includes:
+Examples include:
 
-- spend-based calculations
-- supplier-specific methodology validation
-- activity-based methodology validation
-- emissions-factor governance
-- price-year alignment
-- reporting eligibility
+- reporting transactions
+- reconciliations
+- exception registers
+- assurance workpapers
+- assurance-readiness summaries
 
-For spend-based records:
+The Gold layer answers:
 
-```text
-Aligned Spend
-×
-Approved Emission Factor
-=
-Calculated Scope 3 Emissions
-```
-
-A record is not automatically reporting-ready simply because an emissions value can be calculated.
-
-Methodology, evidence, and governance controls must also pass.
+**What can management and an independent reviewer actually use?**
 
 ---
 
-## Supplier Evidence Logic
+## Control Framework
 
-Supplier evidence is treated separately from simple data availability.
+The project separates several related concepts.
 
-For example:
+### Data Quality
 
-```text
-Evidence exists
-≠
-Evidence verified
-≠
-Evidence assurance-ready
-```
+Is the source information complete, valid, consistent, and appropriately structured?
 
-The project distinguishes:
+### Control Performance
 
-- evidence available
-- evidence approved
-- evidence verified
-- evidence unresolved
-- evidence missing
+Did the record pass the required validation or assurance control?
 
-This is important because supplier-specific reporting requires stronger evidence than simply having a document on file.
+### Reporting Eligibility
+
+Can the record enter governed reporting?
+
+### Assurance Readiness
+
+Is the reporting process sufficiently traceable, documented, and evidence-supported for an independent reviewer?
+
+These concepts are related but not identical.
 
 ---
 
-## Geographic Risk Analytics
+## Important Assurance Principle
 
-The project integrates supplier and farm locations with municipality-level geographic indicators.
+A key principle in this project is:
 
-Geographic variables include examples such as:
+> **A control failure does not automatically mean a confirmed misstatement.**
 
-- municipality
-- biome context
-- soybean deforestation exposure
-- MapBiomas alert count
-- MapBiomas alert area
-- net deforestation-related CO2 exposure
+A failed control may indicate:
 
-Synthetic farm points are spatially linked to real Brazilian municipalities.
+- missing evidence
+- unsupported methodology
+- incomplete documentation
+- unresolved review
+- data-quality weakness
 
-### Interpretation Rule
-
-**Geographic risk is a due-diligence indicator, not evidence of supplier wrongdoing.**
-
-A supplier associated with a higher-risk municipality may require additional review, evidence, or engagement, but the geographic signal does not establish causation.
+The issue must be investigated before concluding that the reported value itself is wrong.
 
 ---
 
-## Assurance Control Framework
+## Control Outcomes
 
-The project tests six control areas:
-
-1. **Responsible-sourcing / DCF status validation**
-2. **Emissions-method validation**
-3. **Final reporting-eligibility gate**
-4. **Geographic master-data validation**
-5. **Price-year alignment**
-6. **Supplier GHG evidence validation**
-
-Each source record is tested against each control.
-
-With:
-
-```text
-100 source records
-×
-6 controls
-=
-600 control tests
-```
-
-Control outcomes include:
+Control tests can produce outcomes such as:
 
 - `PASS`
 - `REVIEW`
 - `FAIL`
 - `N/A`
 
+These outcomes are used to determine whether a record requires additional work before reporting.
+
+---
+
+## Reporting Eligibility
+
+The final reporting gate uses three statuses:
+
+### ELIGIBLE
+
+The required conditions are satisfied and the record can enter governed reporting.
+
+### REVIEW
+
+The record may be valid, but additional judgment, documentation, or evidence is required.
+
+### HOLD
+
+A material unresolved issue prevents the record from entering governed reporting.
+
+Conceptually:
+
+```text
+Required controls satisfied
+→ ELIGIBLE
+
+Additional evidence or judgment needed
+→ REVIEW
+
+Material unresolved issue
+→ HOLD
+```
+
 ---
 
 ## Exception Management
 
-Control failures and review items are converted into an exception register.
+Control failures and review items are documented in an exception register.
 
-Each exception includes:
+Each exception can include:
 
-- exception ID
-- transaction ID
-- supplier ID
+- record identifier
 - exception type
 - severity
 - exception reason
 - control owner
 - remediation action
 - evidence required
-- status
+- review status
 - retest result
 - closure status
 
-This creates a traceable remediation workflow rather than simply identifying bad data.
+This turns data validation into an operational remediation process.
+
+Instead of simply saying:
+
+**“This record failed.”**
+
+the workflow asks:
+
+**“Why did it fail, who owns the fix, what evidence is required, and has the issue been retested?”**
 
 ---
 
-## Reporting Eligibility Logic
+## Evidence and Traceability
 
-The project separates control findings from the final reporting decision.
+Evidence is central to assurance readiness.
 
-A control failure does not automatically mean a confirmed ESG misstatement.
+The project distinguishes among:
 
-The reporting gate uses:
+- evidence available
+- evidence reviewed
+- evidence approved
+- evidence verified
+- evidence missing
+
+A document existing in a folder does not automatically make a value assurance-ready.
+
+The important question is:
+
+**Can the reviewer connect the evidence to the reported value and understand why it is sufficient?**
+
+---
+
+## Assurance Workpaper
+
+The project includes an assurance workpaper designed to summarize:
+
+- the control tested
+- the reporting assertion
+- the source record
+- the evidence reviewed
+- the result
+- the exception
+- the reviewer conclusion
+- remediation status
+
+The workpaper acts as a bridge between the data pipeline and an assurance review.
+
+---
+
+## Reporting Assertions
+
+The assurance workflow can support common reporting assertions such as:
+
+### Completeness
+
+Are all relevant records included?
+
+### Accuracy
+
+Are calculations and values correct?
+
+### Validity
+
+Does the reported item meet the required methodology or definition?
+
+### Consistency
+
+Are methods applied consistently across records and periods?
+
+### Traceability
+
+Can the reported value be traced to source data and evidence?
+
+### Classification
+
+Is the record assigned to the correct reporting category?
+
+---
+
+## Reconciliation
+
+Reconciliation is used to verify that records and values move correctly through the pipeline.
+
+Examples include:
 
 ```text
-Unresolved material issue
-→ HOLD
-
-Unresolved review item
-→ REVIEW
-
-Required controls satisfied
-→ ELIGIBLE
+Source population
+=
+Eligible
++
+Review
++
+Hold
 ```
 
-This distinction supports more defensible management and assurance decisions.
+and:
 
----
+```text
+Calculated emissions
+=
+Reported emissions
++
+Excluded emissions
+```
 
-## Key Results
-
-| Metric | Result |
-|---|---:|
-| Source records | 100 |
-| Unique transaction IDs | 98 |
-| Suppliers assessed | 20 |
-| Reporting-eligible records | 15 |
-| Review records | 25 |
-| Hold records | 60 |
-| Reporting eligibility rate | 15% |
-| Control tests | 600 |
-| Open exceptions | 85 |
-| High-severity open exceptions | 67 |
-| Overall assurance readiness | PARTIALLY READY |
+Reconciliation provides an important assurance check because it confirms that records have not been lost, duplicated, or incorrectly excluded during transformation.
 
 ---
 
 ## Key Data-Quality Finding
 
-The source population contained:
+One of the project lessons was that technical identifiers and business identifiers should not always be treated the same way.
 
-```text
-100 physical source records
-98 unique business transaction IDs
-```
+The project distinguishes:
 
-Two transaction IDs were reused across otherwise distinct records.
+- a business identifier used for business meaning
+- a technical key used to preserve analytical grain
 
-Instead of deleting the records, the pipeline:
+A business-key problem should remain a controlled data-quality issue.
 
-1. preserved all 100 physical records,
-2. created a unique technical `source_record_id`,
-3. retained `transaction_id` as a business identifier,
-4. flagged transaction-ID uniqueness as a data-quality issue.
+It should not become a pipeline duplication problem.
 
-This distinction became an important architectural lesson:
-
-> **A source business-key problem should remain a controlled data-quality exception; it should not become a pipeline duplication problem.**
-
-The technical `source_record_id` is therefore used as the analytical fact grain and technical join key.
+This is an important governance principle for ESG reporting systems.
 
 ---
 
-## Bronze / Silver / Gold Databricks Architecture
+## Assurance Readiness Assessment
 
-### Bronze
+The final readiness assessment combines information from:
 
-Preserves raw source structures:
-
-- supplier master
-- procurement transactions
-- evidence register
-- emissions-factor master
-- municipality reference
-- QGIS farm reference
-
-### Silver
-
-Applies governance and validation:
-
-- standardized procurement
-- geographic validation
-- emissions-factor standardization
-- price-year alignment
-- Scope 3 method validation
-- supplier evidence validation
-- method eligibility
-- reporting gate
-
-### Gold
-
-Produces decision-ready outputs:
-
-- reporting transactions
-- reporting reconciliation
-- exception register
-- assurance workpaper
-- readiness summary
 - control results
-- Power BI fact tables
-- Power BI dimensions
-
----
-
-## Power BI Model
-
-The reporting model uses a star-schema structure.
-
-### Dimensions
-
-- `dim_supplier`
-- `dim_municipality`
-- `dim_control`
-- `dim_control_result`
-
-### Facts
-
-- `fact_reporting_transaction`
-- `fact_control_result`
-- `fact_exception`
-
-Core relationship pattern:
-
-```text
-dim_supplier
-     |
-     +----> fact_reporting_transaction
-     |
-     +----> fact_control_result
-     |
-     +----> fact_exception
-
-dim_municipality
-     |
-     +----> fact_reporting_transaction
-
-dim_control
-     |
-     +----> fact_control_result
-
-dim_control_result
-     |
-     +----> fact_control_result
-```
-
-Single-direction filtering is used from dimensions to facts to avoid ambiguous fact-to-fact relationships.
-
----
-
-## Dashboard 1 — Responsible Sourcing & ESG Readiness Executive Summary
-
-This page summarizes:
-
-- source-record population
+- data-quality checks
+- exception status
+- evidence sufficiency
+- reconciliation
 - reporting eligibility
-- review and hold populations
-- open exceptions
-- high-severity exceptions
-- reporting eligibility mix
-- exception types
-- control-test results
-- reporting vs excluded emissions
-- overall readiness
 
-![Executive Summary](dashboards/page1_executive_summary.png)
+The overall readiness conclusion in the project is:
+
+**PARTIALLY READY**
+
+This means the reporting structure and control framework exist, but unresolved issues remain before the full population would be considered assurance-ready.
 
 ---
 
-## Dashboard 2 — Supplier Controls & Exception Management
+## Assurance Maturity
 
-This page supports operational remediation and control oversight.
+The project also illustrates how assurance readiness can be viewed as a maturity journey.
 
-It includes:
+### Level 1 — Ad Hoc
 
-- total control tests
-- control pass rate
-- open exceptions
-- high-severity exceptions
-- exceptions by type
-- exceptions by control owner
-- exceptions by severity
-- control performance
-- detailed exception register
-- remediation actions
-- evidence requirements
-- retest and closure status
+Data are manually collected with limited ownership or documentation.
 
-![Control Performance & Exception Management](dashboards/page2_control_exception_management.png)
+### Level 2 — Defined
 
----
+Definitions and responsibilities begin to be standardized.
 
-## Dashboard 3 — Supplier Risk & Responsible Sourcing Decision
+### Level 3 — Controlled
 
-This is the main supplier decision-support page.
+Validation rules, evidence requirements, and exception tracking are implemented.
 
-It combines:
+### Level 4 — Assurance Ready
 
-- suppliers assessed
-- suppliers with open exceptions
-- suppliers with high-severity exceptions
-- suppliers with reporting-eligible records
-- open exceptions by supplier
-- supplier assurance status
-- supplier GHG evidence availability
-- municipality-level deforestation exposure
-- supplier-level calculated emissions
-- reportable emissions
-- assurance decision logic
+Reported values are traceable, reproducible, reconciled, and supported by evidence.
 
-![Supplier Risk & Assurance Decision](dashboards/page3_supplier_risk_assurance_decision.png)
+### Level 5 — Continuously Monitored
+
+Controls, exceptions, and evidence are monitored systematically and improved over time.
+
+The project demonstrates movement toward the controlled and assurance-ready stages.
 
 ---
 
-## Supplier-Level Decision Logic
+## Databricks Workflow
 
-The final page converts governance and control results into a supplier review decision.
-
-Illustrative decision logic:
+The analytical pipeline is organized into five main notebooks:
 
 ```text
-HOLD
-→ one or more HOLD records
-or unresolved high-severity exception
-
-REVIEW REQUIRED
-→ no hard HOLD issue
-but unresolved review records remain
-
-ASSURANCE READY
-→ required conditions satisfied
-and no material unresolved exceptions
+01_bronze_ingestion.ipynb
+02_silver_validation.ipynb
+03_gold_reporting.ipynb
+04_assurance_workpaper.ipynb
+05_executive_assurance_dashboard.ipynb
 ```
 
-This decision logic is a project demonstration and should not be interpreted as an official IFF policy or decision rule.
+### 01 — Bronze Ingestion
+
+Loads and preserves the synthetic ESG source data.
+
+### 02 — Silver Validation
+
+Applies data-quality and control logic.
+
+### 03 — Gold Reporting
+
+Creates governed reporting and reconciliation outputs.
+
+### 04 — Assurance Workpaper
+
+Creates a structured review layer connecting records, controls, evidence, and conclusions.
+
+### 05 — Executive Assurance Dashboard
+
+Summarizes assurance readiness and management-level findings.
 
 ---
 
-## Why This Project Matters
+## Project Outputs
 
-Responsible sourcing is often treated separately from carbon accounting, geospatial risk, and ESG reporting.
+The main outputs include:
 
-This project demonstrates a more integrated approach.
-
-Instead of asking only:
-
-> How much Scope 3 carbon do we have?
-
-the project asks:
-
-> Can the sourcing record be trusted, traced, supported with evidence, geographically contextualized, and responsibly used in reporting and supplier decisions?
-
-This creates a bridge between:
-
-- procurement
-- sustainability
-- responsible sourcing
-- carbon accounting
-- data governance
-- risk management
-- audit / assurance
+- governed ESG reporting data
+- data-quality validation results
+- exception register
+- reconciliation results
+- assurance workpaper
+- assurance findings
+- executive assurance-readiness summary
 
 ---
 
-## Key Governance Lessons
+## Project Results
 
-### 1. Master data comes first
+The project demonstrates how raw ESG data can be converted into a controlled reporting population.
 
-Supplier, municipality, farm, material, and transaction identifiers must be standardized before reliable analysis is possible.
+The most important result is not a single sustainability number.
 
-### 2. Data availability is not evidence quality
+It is the ability to answer:
 
-A supplier report can exist but still be unverified or unsuitable for reporting.
+> **Can this number be traced, reproduced, supported, reviewed, and defended?**
 
-### 3. Calculated emissions are not automatically reportable
+That is the core of assurance readiness.
 
-Methodology, evidence, controls, and governance determine reporting eligibility.
+---
 
-### 4. Geographic risk is contextual
+## Executive Reporting
 
-Landscape-level risk can support due diligence but should not be misinterpreted as proof of supplier behavior.
+The executive reporting layer focuses on questions management would care about:
 
-### 5. Exceptions need ownership
+- How much of the reporting population is ready?
+- How many records remain under review?
+- How many are on hold?
+- What types of exceptions remain?
+- Which issues are material?
+- Who owns remediation?
+- Has the dataset reconciled?
+- What is the overall readiness conclusion?
 
-A useful control framework identifies:
+---
 
-- what failed
-- why it failed
-- who owns remediation
-- what evidence is required
-- whether the issue was retested
-- whether it was closed
+## Project Visuals
 
-### 6. Technical keys and business keys serve different purposes
+### Reporting Eligibility
 
-`source_record_id` protects fact-table grain.
+![Reporting Eligibility](assets/reporting-eligibility.png)
 
-`transaction_id` remains a business identifier that is itself subject to quality controls.
+### Gold Reconciliation
+
+![Gold Reconciliation](assets/gold-reconciliation.png)
+
+### Assurance Readiness Summary
+
+![Assurance Readiness Summary](assets/assurance-readiness-summary.png)
+
+---
+
+## Documentation
+
+Additional project documentation is available in:
+
+- [`docs/methodology.md`](docs/methodology.md)
+- [`docs/control-framework.md`](docs/control-framework.md)
+- [`docs/assurance-findings.md`](docs/assurance-findings.md)
+- [`docs/sources.md`](docs/sources.md)
 
 ---
 
 ## Technology Stack
-
-### Data Engineering
 
 - Databricks
 - Delta Lake
 - SQL
 - Python
 - pandas
-
-### Analytics & Visualization
-
-- Power BI
-- DAX
-- Excel
-
-### Geospatial Analysis
-
-- QGIS
-- IBGE geographic data
-- Trase
-- MapBiomas Alerta
-
-### Sustainability & ESG
-
-- Scope 3 Category 1
-- supplier evidence governance
-- responsible sourcing
-- ESG data governance
-- control testing
-- assurance readiness
+- Jupyter notebooks
+- ESG control logic
+- data-quality validation
+- assurance documentation
 
 ---
 
 ## Repository Structure
 
 ```text
-responsible-sourcing-esg-assurance-analytics/
+esg-assurance-readiness-data-governance/
 │
 ├── README.md
-├── .gitignore
-├── LICENSE
 │
-├── dashboards/
-│   ├── page1_executive_summary.png
-│   ├── page2_control_exception_management.png
-│   └── page3_supplier_risk_assurance_decision.png
+├── assets/
+│   ├── reporting-eligibility.png
+│   ├── gold-reconciliation.png
+│   └── assurance-readiness-summary.png
 │
-├── databricks/
-│   ├── 00_setup.sql
-│   ├── 01_bronze_ingestion.py
-│   ├── 02_silver_standardization.sql
-│   ├── 03_geo_validation.sql
-│   ├── 04_scope3_method_validation.sql
-│   ├── 05_evidence_validation.sql
-│   ├── 06_reporting_gate.sql
-│   ├── 07_reconciliation.sql
-│   ├── 08_exception_register.sql
-│   ├── 09_assurance_workpaper.sql
-│   ├── 10_assurance_readiness_summary.sql
-│   ├── 11_control_results.sql
-│   └── 12_powerbi_star_schema.sql
+├── data/
+│   ├── README.md
+│   └── synthetic/
 │
 ├── docs/
 │   ├── methodology.md
-│   ├── data-governance-framework.md
-│   ├── assurance-control-framework.md
-│   ├── data-dictionary.md
-│   └── limitations.md
+│   ├── control-framework.md
+│   ├── assurance-findings.md
+│   └── sources.md
 │
-├── powerbi/
-│   ├── measures.md
-│   └── model_relationships.md
-│
-├── architecture/
-│   └── responsible_sourcing_assurance_architecture.png
-│
-├── sample_data/
-│   └── README.md
-│
-└── assets/
+└── notebooks/
+    ├── 01_bronze_ingestion.ipynb
+    ├── 02_silver_validation.ipynb
+    ├── 03_gold_reporting.ipynb
+    ├── 04_assurance_workpaper.ipynb
+    └── 05_executive_assurance_dashboard.ipynb
 ```
+
+---
+
+## What I Learned
+
+The biggest lesson from this project is that assurance readiness is not mainly about checking numbers at the end.
+
+It starts much earlier.
+
+A reliable ESG reporting process needs:
+
+**clear definitions  
+→ ownership  
+→ controlled source data  
+→ validation  
+→ evidence  
+→ exception management  
+→ reconciliation  
+→ approval**
+
+That is why data governance and assurance readiness are so closely connected.
+
+The stronger the governance and traceability are upstream, the easier it becomes to defend the final ESG report.
 
 ---
 
 ## Limitations
 
-This is a portfolio demonstration and not an official IFF system, assessment, or assurance engagement.
+This is a portfolio and training project.
 
 Key limitations include:
 
-- supplier records are synthetic
-- procurement transactions are synthetic
-- farm locations are synthetic points constrained to real municipalities
-- supplier evidence records are synthetic
-- geographic indicators are landscape-level contextual signals
-- project decision logic is illustrative
-- the workflow does not establish supplier wrongdoing or legal noncompliance
-- public data availability and methodology may change over time
+- synthetic source data
+- illustrative control logic
+- no independent external assurance opinion
+- no claim that the workflow represents an official company reporting system
+- assurance conclusions are demonstration outputs rather than formal audit conclusions
 
----
-
-## Data Ethics and Interpretation
-
-This project intentionally separates:
-
-**risk indicator**
-
-from
-
-**evidence of causation**
-
-and separates:
-
-**control failure**
-
-from
-
-**confirmed reporting misstatement**
-
-These distinctions are important for responsible supplier engagement, ESG governance, and defensible assurance processes.
+The purpose is to demonstrate the design of an ESG assurance-readiness workflow, not to provide an external assurance opinion.
 
 ---
 
 ## Portfolio Summary
 
-This project demonstrates an end-to-end responsible-sourcing analytics workflow:
+This project demonstrates an end-to-end ESG assurance-readiness workflow:
 
-**supplier master data  
-→ sourcing controls  
-→ supplier evidence  
-→ Scope 3 methodology  
-→ geographic risk  
+**source data  
 → data governance  
-→ exception management  
-→ assurance readiness  
-→ supplier decision support**
+→ validation  
+→ control testing  
+→ exceptions  
+→ remediation  
+→ reconciliation  
+→ workpaper  
+→ reporting eligibility  
+→ assurance readiness**
 
-The central idea is that responsible sourcing requires more than collecting supplier data.
+The central idea is simple:
 
-It requires making that data:
-
-**defined, owned, validated, traceable, evidence-supported, reviewable, and decision-ready.**
-```
-
-I would use this as your full README. It makes **responsible sourcing the main story**, while Databricks, Scope 3, geospatial analysis, Power BI, data governance, and assurance support that story rather than compete with it.
+> **Before ESG data can be assured, it has to be governed.**
