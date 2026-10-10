@@ -1,7 +1,6 @@
 # ESG Assurance Readiness & Data Governance Analytics
 
 This portfolio project demonstrates how ESG data can be prepared for assurance by making it traceable, controlled, reproducible, and supported by evidence before it enters external reporting.
-
 The project focuses on the data and control layer behind ESG reporting rather than only the final sustainability metrics.
 
 It combines:
@@ -19,7 +18,7 @@ It combines:
 
 The workflow was built using Databricks, SQL, Python, and analytical reporting outputs.
 
-> This is a portfolio and training project. Synthetic data are used to demonstrate the assurance-readiness workflow and should not be interpreted as actual company reporting data.
+> This is a portfolio and training project. Synthetic data are used to demonstrate the assurance-readiness workflow and should not be interpreted as actual company reporting data. Public Analog Devices sustainability, Scope 3, methodology, and assurance materials are used only as real-world context; all transaction-level data, controls, exceptions, and workpapers are synthetic case-study materials.
 
 ---
 
@@ -315,9 +314,6 @@ Conceptually:
 Required controls satisfied
 → ELIGIBLE
 
-Additional evidence or judgment needed
-→ REVIEW
-
 Material unresolved issue
 → HOLD
 ```
@@ -452,19 +448,13 @@ Reconciliation provides an important assurance check because it confirms that re
 
 ## Key Data-Quality Finding
 
-One of the project lessons was that technical identifiers and business identifiers should not always be treated the same way.
-
-The project distinguishes:
-
-- a business identifier used for business meaning
-- a technical key used to preserve analytical grain
-
-A business-key problem should remain a controlled data-quality issue.
-
-It should not become a pipeline duplication problem.
-
-This is an important governance principle for ESG reporting systems.
-
+73 source records
+→ duplicate identified
+→ 72 remediated records
+→ 61 ELIGIBLE
+→ 11 HOLD
+→ Gold reconciliation PASS
+→ overall assurance readiness assessed
 ---
 
 ## Assurance Readiness Assessment
